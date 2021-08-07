@@ -1,6 +1,6 @@
 
-package lk.ijse.gitpm;
 
+package lk.ijse.gitpm;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-class Main extends Application {
+public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
@@ -18,14 +18,15 @@ class Main extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/ijse/gitpm/view/dashboard.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/lk/ijse/gitpm/view/dashbord.fxml")));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setResizable(false);
+            //primaryStage.initStyle(StageStyle.TRANSPARENT);
+            //primaryStage.setFullScreen(true);
             primaryStage.show();
         } catch (Exception e) {
             System.out.println(e);
-
         }
     }
 }
