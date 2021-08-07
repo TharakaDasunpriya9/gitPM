@@ -1,8 +1,10 @@
 /*
- * *
- *  * @author : tharakadasunpriya <tharakadasunpriya.tharaka@gmail.com>
- *  * @since : 07/08/2021
- *  *
+ *
+ *  * *
+ *  *  * @author : tharakaDasunpriya <tharakadasunpriya.tharaka@gmail.com>
+ *  *  * @since : 07/08/2021
+ *  *  *
+ *
  */
 
 
@@ -14,43 +16,41 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.ijse.gitpm.db.DBConnection;
-import lk.ijse.gitpm.model.Customer;
-
+import lk.ijse.gitpm.model.Item;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CustomerConroller implements Initializable {
+public class ItemController implements Initializable {
     @FXML
-    private TextField txtCusEmail;
+    private TextField txtItemPrice;
 
     @FXML
-    private TextField txtCusName;
+    private TextField txtItemName;
 
     @FXML
-    private TextField txtCusAddress;
+    private TextField txtItemExpDate;
 
     @FXML
-    private TextField txtCusTel;
+    private TextField txtItemQty;
 
     @FXML
     void btnSave(ActionEvent event) {
-        Customer cust=new Customer(txtCusName.getText(),txtCusAddress.getText(),txtCusTel.getText(),txtCusEmail.getText());
-        System.out.println(txtCusAddress.getText());
+        Item cust=new Item(txtItemName.getText(),txtItemPrice.getText(),txtItemExpDate.getText(),txtItemQty.getText());
         try {
             Connection con = DBConnection.getInstance().getConnection();
-            PreparedStatement stm = con.prepareStatement("INSERT INTO customer VALUES(?,?,?,?)");
+            PreparedStatement stm = con.prepareStatement("INSERT INTO item VALUES(?,?,?,?)");
             stm.setString(1, cust.getName());
-            stm.setString(2, cust.getAddress());
-            stm.setString(3, cust.getTelephone());
-            stm.setString(4, cust.getemail());
+            stm.setString(2, cust.getPrice());
+            stm.setString(3, cust.getExpDate());
+            stm.setString(4, cust.getQty());
             boolean saved = stm.executeUpdate() > 0;
             if (saved) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Customer");
-                alert.setHeaderText("Customer Saved !");
+                alert.setTitle("Item");
+                alert.setHeaderText("Item Saved !");
                 alert.show();
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -66,13 +66,12 @@ public class CustomerConroller implements Initializable {
 
     }
     private void clearAll() {
-        txtCusEmail.setText(null);
-        txtCusAddress.setText(null);
-        txtCusTel.setText(null);
-        txtCusName.setText(null);
+        txtItemName.setText(null);
+        txtItemPrice.setText(null);
+        txtItemExpDate.setText(null);
+        txtItemQty.setText(null);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }
